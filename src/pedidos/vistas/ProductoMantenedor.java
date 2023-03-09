@@ -67,16 +67,16 @@ public class ProductoMantenedor
       System.out.println("<< Ingresar Producto >> \n\n");
 
       System.out.print("codigo: ");
-      producto.setCodigo(ingreso.nextInt());
+      producto.setCodigo(Integer.parseInt(ingreso.nextLine()));
 
       System.out.print("descripcion: ");
       producto.setDescripcion(ingreso.nextLine());
 
       System.out.print("Precio: ");
-      producto.setPrecio(ingreso.nextDouble());
+      producto.setPrecio(Double.parseDouble(ingreso.nextLine()));
 
       System.out.print("Stock: ");
-      producto.setStock(ingreso.nextInt());
+      producto.setStock(Integer.parseInt(ingreso.nextLine()));
 
       return producto;
    }
