@@ -1,6 +1,7 @@
 package pedidos.vistas;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import pedidos.modelo.Producto;
@@ -52,8 +53,10 @@ public class ProductoMantenedor
             producto = ingresarProducto();
             break;
          case 2:
+            actualizarProducto();
             break;
          case 3:
+            eliminarProducto();
             break;
          case 4:
             listarProductos();
@@ -98,6 +101,47 @@ public class ProductoMantenedor
       
       System.out.print("\n Presionar <<Enter>> para continuar: ");
       ingreso.nextLine();
+   }
+
+   private void eliminarProducto(){
+      int codigo = 0;
+
+      System.out.println("\n\n\t << Eliminacion de Producto >>");
+
+      System.out.print("\n Ingresar codigo: ");
+      codigo = ingreso.nextInt();
+
+      Producto producto = productoRepositorio.obtener(codigo);
+
+      if (producto != null){
+         productoRepositorio.eliminar(codigo);
+         System.out.println("\n Producto eliminado satisfactoriamente...");
+      }
+      else
+         System.out.printf("\n Producto con codigo: %d no existe...", codigo);
+
+      System.out.print("\n Presionar <<Enter>> para continuar: ");
+      ingreso.nextLine();
+
+   }
+
+   private void actualizarProducto()
+   {
+      int codigo = 0;
+
+      System.out.println("\n\n\t << Actualización de Producto >>");
+
+      try{
+         System.out.print("\n Ingresar codigo: ");
+         codigo = ingreso.nextInt();
+
+         System.out.println("\n Actualizacion realizada satisfactoriamente...");
+         ingreso.nextLine();
+      }
+      catch(InputMismatchException e){
+         System.out.println("\n Error !!! Se esperaba un dato numerico...");
+         ingreso.nextLine();
+      }
    }
 
    public void limpiarPantalla()
