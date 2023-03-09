@@ -7,7 +7,15 @@ import pedidos.modelo.Producto;
 
 public class ProductoRepositorioList implements IProductoRepositorio
 {
-   List<Producto> productosList = new ArrayList<>();
+   List<Producto> productosList;
+
+   public ProductoRepositorioList(){
+      productosList = new ArrayList<>();
+
+      productosList.add(new Producto(10, "Marcador Pelikan", 2.65, 12));
+      productosList.add(new Producto(20, "Usb Kingston 64 GB", 9.16, 17));
+      productosList.add(new Producto(30, "Cuaderno cuadros Jean Book", 5.23, 67));
+   }
 
    @Override
    public void ingresar(Producto producto) 

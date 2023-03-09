@@ -6,13 +6,27 @@ public class Producto
    private String descripcion;
    private double precio;
    private int stock;
+
+   public Producto(){
+
+   }
    
    public Producto(int codigo, String descripcion, double precio) {
       this.codigo = codigo;
       this.descripcion = descripcion;
       this.precio = precio;
    }
-   
+
+   public Producto(int codigo, String descripcion, double precio, int stock) {
+      this.codigo = codigo;
+      this.descripcion = descripcion;
+      this.precio = precio;
+      this.stock = stock;
+   }
+
+   public void setCodigo(int codigo) {
+      this.codigo = codigo;
+   }
    
    public void setDescripcion(String descripcion) {
       this.descripcion = descripcion;
@@ -40,9 +54,7 @@ public class Producto
 
    @Override
    public String toString() {
-      return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + precio + ", stock=" + stock
-            + "]";
+      return codigo +  "\t" + descripcion + "\t" + precio + "\t" + stock;
    }
-
 
 }
