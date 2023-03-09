@@ -1,5 +1,6 @@
 package pedidos.vistas;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import pedidos.modelo.Producto;
@@ -13,7 +14,7 @@ public class ProductoMantenedor
 
    private void presentarMenuProductos(){
 
-      System.out.println("\n\t<< Mantenedor de Productos >>\n");
+      System.out.println("\n\n\t<< Mantenedor de Productos >>\n");
 
       System.out.println("\t 1. Crear producto");
       System.out.println("\t 2. Actualizar producto");
@@ -28,12 +29,12 @@ public class ProductoMantenedor
       int opcion;
 
       do{
-
+         limpiarPantalla();
          presentarMenuProductos();
          opcion = ingreso.nextInt();
          procesarOpcionMenu(opcion);
 
-         System.out.print("Presionar <<Enter>> para continuar: ");
+         System.out.print("\n Presionar <<Enter>> para continuar: ");
          ingreso.nextLine();
       }
       while(opcion >= 1 && opcion < 5);
@@ -43,6 +44,8 @@ public class ProductoMantenedor
    private void procesarOpcionMenu(int opcion)
    {
       Producto producto;
+
+      limpiarPantalla();
 
       switch (opcion) {
          case 1:
@@ -67,7 +70,8 @@ public class ProductoMantenedor
       System.out.println("<< Ingresar Producto >> \n\n");
 
       System.out.print("codigo: ");
-      producto.setCodigo(Integer.parseInt(ingreso.nextLine()));
+      producto.setCodigo(ingreso.nextInt());
+      ingreso.nextLine();
 
       System.out.print("descripcion: ");
       producto.setDescripcion(ingreso.nextLine());
@@ -78,16 +82,35 @@ public class ProductoMantenedor
       System.out.print("Stock: ");
       producto.setStock(Integer.parseInt(ingreso.nextLine()));
 
+      productoRepositorio.ingresar(producto);
+
       return producto;
    }
 
    private void listarProductos()
    {
+      System.out.println("\n\n\t << Listado de Productos >>");
       System.out.printf("%s \t %s \t\t %s \t %s\n", "Codigo", "Descripcion", "Precio", "Stock");
       System.out.println("---------------------------------------------------");
 
       for (Producto producto : productoRepositorio.consultarTodos()) 
          System.out.println(producto);
+      
+      System.out.print("\n Presionar <<Enter>> para continuar: ");
+      ingreso.nextLine();
+   }
+
+   public void limpiarPantalla()
+   {
+      try {
+         if (System.getProperty("os.name").contains("Windows"))
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+         else
+            Runtime.getRuntime().exec("clear");
+      } 
+      catch (IOException | InterruptedException ex) {
+         
+      }
       
    }
 }
